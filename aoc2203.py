@@ -4,7 +4,7 @@ with open('2203.0') as file:
 
 def calc(c: chr) -> int:
     cc = ord(c)
-    if 'a'<=c<='z':
+    if 'a' <= c <= 'z':
         return cc - ord('a') + 1
     else:
         return cc - ord('A') + 27
