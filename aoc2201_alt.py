@@ -13,4 +13,4 @@ with open('2201.0') as file:
 cl.sort(reverse=True)
 
 print("Star 1:", cl[0])
-print("Star 2:", sum(cl[:3]))
+print("Star 2:", cl[0] + cl[1] + cl[2])
