@@ -69,10 +69,8 @@ int	main()
 		{
 			if (vd[from].empty())
 				continue ;
-
-			char 	n = vd[from].back();
-
-			E += n;
+			c = vd[from].back();
+			E += c;
 			vd[from].pop_back();
 		}
 		while (E != "")

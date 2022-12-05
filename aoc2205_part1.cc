@@ -64,17 +64,14 @@ int	main()
 		{
 			if (vd[from].empty())
 				continue ;
-			
-			char 	n = vd[from].back();
-			
+			c = vd[from].back();
 			vd[from].pop_back();
-			vd[to].push_back(n);
+			vd[to].push_back(c);
 		}
 	}
 	i = -1;
 	while (++i < numc)
 		res += vd[i].back();
-
 	cout << "Star 1: " << res << endl;
 	cout << "Star 2: " << res2 << endl;
 }

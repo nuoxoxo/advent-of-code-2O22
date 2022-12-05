@@ -60,25 +60,22 @@ int	main()
 	
 	while (getline(cin, s))
 	{
-		int	Move, From, To;
+		int	M, F, T;
 		int	move, from, to;
 
-		sscanf(s.c_str(), "move %d from %d to %d", &Move, &From, &To);
-		cout << Move << ' ' << From << ' ' << To << endl;
+		sscanf(s.c_str(), "move %d from %d to %d", & M, & F, & T);
 
 		// part 1
 
-		from = From - 1;
-		to = To - 1;
-		move = Move;
+		from = F - 1;
+		to = T - 1;
+		move = M;
 		i = -1;
 		while (++i < move)
 		{
 			if (vd1[from].empty())
 				continue ;
-
 			c = vd1[from].back();
-
 			vd1[from].pop_back();
 			vd1[to].push_back(c);
 		}
@@ -87,18 +84,16 @@ int	main()
 
 		string		E;
 
-		from = From - 1;
-		to = To - 1;
-		move = Move;
+		from = F - 1;
+		to = T - 1;
+		move = M;
 		i = -1;
 		while (++i < move)
 		{
 			if (vd2[from].empty())
 				continue ;
-
-			char 	n = vd2[from].back();
-
-			E += n;
+			c = vd2[from].back();
+			E += c;
 			vd2[from].pop_back();
 		}
 		while (E != "")
@@ -114,7 +109,6 @@ int	main()
 		res1 += vd1[i].back();
 		res2 += vd2[i].back();
 	}
-
 	cout << "Star 1: " << res1 << endl;
 	cout << "Star 2: " << res2 << endl;
 }
