@@ -1,4 +1,5 @@
-comp	:=	c++ -std=c++11 -Wall -Werror -Wextra
+#comp	:=	c++ -std=c++11 -Wall -Werror -Wextra
+comp	:=	c++ -std=c++11 
 name	:=	out
 rmv	:=	rm -f
 
@@ -11,8 +12,8 @@ src	:=	aoc2204a.cc
 src	:=	aoc2204.cc
 src	:=	aoc2205a.cc
 src	:=	aoc2205.cc
-
-src	:=	aoc2201.cc
+src	:=	aoc2205_part1.cc
+src	:=	aoc2205_part2.cc
 
 all	:	$(name)
 
