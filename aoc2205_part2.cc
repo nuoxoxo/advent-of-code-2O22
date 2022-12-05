@@ -1,101 +1,96 @@
-#include "h.hpp"
+#include "iostream"
+#include "vector"
+#include "sstream"
+#include "deque"
+
+using	namespace std;
 
 int	main()
 {
-	vector<string>	a;
-	string		s;
-	int		res = 0, res2 = 0, i;
-	char	c;
+	vector<string>		a;
+	string			s;
+	int			i;
+	char			c;
+	string			res, res2;
+	// int			res, res2;
 	vector<deque<char>>	vd;
 
+	// 1st half of input - piles
 
 	while (getline(cin, s))
 	{
-		if (s == "")		break ;
-		cout << s << endl;
+		if (s == "")
+			break ;
 		a.push_back(s);
 	}
+
+	// total num of crates
+
 	stringstream	ss(a[a.size() - 1]);
-	int	numc;
-	while (!ss.eof() && ss >> numc) ;;
-	cout << "total crates: " << numc << endl;
+	int		numc;
+
+	while (!ss.eof() && ss >> numc)
+		;;
+
+	// parse those crates
+
 	i = -1;
-	while (++i < numc) vd.push_back(deque<char>());
-	cout << "length vd: " << vd.size() << endl;
+	while (++i < numc)
+		vd.push_back(deque<char>());
 	a.pop_back();
 	for (string line : a)
 	{
 		i = 0;
 		// 1st crate
-		cout << "1st: " << line[1] << endl;
 		if (line[1] <= 'Z' && line[1] >= 'A')
-		{	vd[i].push_front(line[1]);
-			cout << "1st added: " << vd[i].front() << endl;
-		}
+			vd[i].push_front(line[1]);
+		// subsequent crates
 		while (++i < numc)
 		{
 			c = line[1 + 4 * i];
-			cout << i+1 << "th: " << c << endl;	
 			if (c <= 'Z' && c >= 'A')
 				vd[i].push_front(c);
-			//cout << i+1 << "th added: " << vd[i].front() << endl;
 		}
 	}
-	i = -1;
-	cout << "printing crates: " << endl;
-	while (++i < numc)
-	{
-		for (char c: vd[i])
-			cout << i << ": " << c << endl;
-		cout << endl;
-	}
+
+	// 2nd half of input - operations
 	
+	// part 2 only
+
 	while (getline(cin, s))
 	{
-		int mov, from, to;
-		sscanf(s.c_str(), "move %d from %d to %d", & mov, & from, & to);
-		cout << mov << ' ' << from << ' ' << to << ' ' << endl;
-		
-		from--;
-		to--;
+		int	mov, from, to;
+
+		sscanf(s.c_str(), "move %d from %d to %d", &mov, &from, &to);
+		--from;
+		--to;
 		i = -1;
-		string	mos;
+
+		// from here on, part 2 diffs from part 1
+
+		string		E;
+
 		while (++i < mov)
 		{
 			if (vd[from].empty())
 				continue ;
+
 			char 	n = vd[from].back();
-			mos += n;
+
+			E += n;
 			vd[from].pop_back();
-			//vd[to].push_back(n);
 		}
-		while (mos != "")
+		while (E != "")
 		{
-			c = mos[mos.length() - 1];
-			mos.pop_back();
+			c = E[E.length() - 1];
+			E.pop_back();
 			vd[to].push_back(c);
-
 		}
-		/*int j = -1;
-		while (++j < numc)
-		{
-			for (char c: vd[j])
-				cout << j << ": " << c << endl;
-			cout << endl;
-		}*/
 	}
-
 	i = -1;
 	while (++i < numc)
-	{
-		cout << vd[i].back();
-	}
-	cout << endl;
+		res2 += vd[i].back();
 
-	// part 2
-
-	
-
-	//cout << "Star 1: " << res << endl;
-	//cout << "Star 1: " << res2 << endl;
+	cout << "Star 1: " << res << endl;
+	cout << "Star 2: " << res2 << endl;
 }
