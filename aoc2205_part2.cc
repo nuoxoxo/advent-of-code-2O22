@@ -24,16 +24,11 @@ int	main()
 		a.push_back(s);
 	}
 
-	// total num of crates
-
 	stringstream	ss(a[a.size() - 1]);
 	int		numc;
 
 	while (!ss.eof() && ss >> numc)
 		;;
-
-	// parse those crates
-
 	i = -1;
 	while (++i < numc)
 		vd.push_back(deque<char>());
