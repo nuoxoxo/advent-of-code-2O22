@@ -1,21 +1,26 @@
-#include "h.hpp"
+#include "iostream"
+#include "vector"
+
+using	namespace std;
 
 int	main()
 {
-	string	s;
-	int	n, i, j;
-	int	r1, r2;
+	vector<string>	a;
+	string		s;
+	int		n, i, j;
+	int		r1, r2;
+
+	while (cin >> s)
+		a.push_back(s);
+
+	bool	ok = false;
 	int	p2 = 14;
-	string	l
 
-
-	cin >> s;
 	for (string& l : a)
 	{
-		bool	ok = false;
-		
-		n = (int) l.length();
+
 		i = -1;
+		n = (int) l.length();
 		while (++i < n - 4)
 		{
 			s = l.substr(i, 4);	
