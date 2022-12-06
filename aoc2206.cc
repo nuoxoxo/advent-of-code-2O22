@@ -1,4 +1,7 @@
-#include "h.hpp"
+#include "iostream"
+#include "vector"
+
+using	namespace std;
 
 int	main()
 {
@@ -7,19 +10,17 @@ int	main()
 	int		n, i, j;
 	int		r1, r2;
 
-	int		p = 4;
-	int		p2 = 14;
-
 	while (cin >> s)
-	{
 		a.push_back(s);
-	}
+
+	bool	ok = false;
+	int	p2 = 14;
+
 	for (string& l : a)
 	{
-		bool ok = false;
-		
-		n = (int) l.length();
+
 		i = -1;
+		n = (int) l.length();
 		while (++i < n - 4)
 		{
 			s = l.substr(i, 4);	
@@ -41,13 +42,13 @@ int	main()
 			}
 		}
 		i = -1;
-		ok = false;
-		while (++i < n - 4)
+		while (++i < n - p2)
 		{
-			s = l.substr(i, 4);	
+			s = l.substr(i, p2);	
 			sort(s.begin(), s.end());
 			j = 0;
-			while (++j < 4 && !ok)
+			ok = false;
+			while (++j < p2 && !ok)
 			{
 				if (s[j - 1] == s[j])
 				{
@@ -57,9 +58,11 @@ int	main()
 			}
 			if (!ok)
 			{
-				r1 = i + 4;
+				r2 = i + p2;
 				break;
 			}
 		}
 	}
+	cout << "Star 1: " << r1 << endl;
+	cout << "Star 2: " << r2 << endl;
 }
