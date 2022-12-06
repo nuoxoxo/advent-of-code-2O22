@@ -24,11 +24,10 @@ for s in a:
 op.pop(0)
 for s in op:
     ss = s.split()
-    M, F, T = int(ss[1]), int(ss[3]) - 1, int(ss[5]) - 1
+    m, f, t = int(ss[1]), int(ss[3]) - 1, int(ss[5]) - 1
     
     # part 1
     
-    f, t, m = F, T, M
     for i in range(m):
         if len(a1[f]) == 0:
             continue
@@ -37,7 +36,6 @@ for s in op:
     # part 2
     
     E = ''
-    f, t, m = F, T, M
     for i in range(m):
         if len(a2[f]) == 0:
             continue
