@@ -1,4 +1,9 @@
-#include "h.hpp"
+#include "iostream"
+#include "sstream"
+#include "vector"
+#include "map"
+
+using	namespace std;
 
 bool	is_number(string &);
 
@@ -57,8 +62,7 @@ int	main()
 
 	long long	r2 = (int) 1e9;
 
-	ll = mp[sls];
-	togo = ll - top;
+	togo = mp[sls] - top;
 	it = mp.begin();
 	while (it != mp.end())
 	{
@@ -71,7 +75,6 @@ int	main()
 		it++;
 	}
 	// cout << "\n";
-
 	
 	cout << "Star 1: " << r << endl;
 	cout << "Star 2: " << r2 << endl;
