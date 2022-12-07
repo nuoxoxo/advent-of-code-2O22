@@ -15,14 +15,17 @@ src	:=	aoc2205.cc
 src	:=	aoc2205_part1.cc
 src	:=	aoc2205_part2.cc
 src	:=	aoc2206.cc
+src	:=	aoc2207a.cc
 src	:=	aoc2207.cc
+src	:=	aoc2208.cc
 
 all	:	$(name)
 
 $(name)	:	$(src)
 		@ $(comp) $^ -o $@
 		@ echo "data" && echo "" 
-		@ ./$(name) < 2207.0
+		@ ./$(name) < 2208.0
+		@#@ ./$(name) < 2207.0
 		@#@ ./$(name) < 2206.0
 		@#@ ./$(name) < 2205.0
 		@#@ ./$(name) < 2204.0
