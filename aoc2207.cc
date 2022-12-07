@@ -10,7 +10,8 @@ int	main()
 	vector<string>	lv; // current dir
 	string		s;
 	int		i, np;
-	long long	ll;
+	long long	ll, togo;
+	long long 	top=4*(int)1e7;
 
 	while (getline(cin, s))
 		a.push_back(s);
@@ -88,15 +89,23 @@ int	main()
 		}
 		*/
 	}
+	long long r2 = (int) 1e9;
+	ll = mp["/"];
+	togo = ll - top;
 	it = mp.begin();
 	while (it != mp.end())
 	{
 		cout << it->first << endl;
 		if (it->second < 100000)
 			r += it->second;
+		if (it->second > togo)
+			r2 = it->second < r2? it->second: r2;
 		it++;
 	}
+
+	
 	cout << r << endl;
+	cout << r2 << endl;
 }
 
 bool	is_number(string & s)
