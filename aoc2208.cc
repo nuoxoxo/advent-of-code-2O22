@@ -1,4 +1,8 @@
-#include "h.hpp"
+#include "iostream"
+#include "vector"
+#include "sstream"
+
+using	namespace std;
 
 int	main()
 {
@@ -15,30 +19,36 @@ int	main()
 			t.push_back(c - '0');
 		a.push_back(t);
 	}
+
 	int	R = (int) a.size(), C = (int) a[0].size();
+	int	res = 0, i, j, r, c;
 	int	peri = R * 2 + C * 2 - 4;
-	int	i, j, r, c;
-	int	res = 0;
-	long long	res2 = 0;
+	
+	// part 2
+	long long	res2 = 0, scen;
+	int		u, d, l, ri;
+	
 	r = 0;
 	while (++r < R - 1)
 	{
-		c = 0;
-		int u, d, l, ri;
+		c = 0;	
 		while (++c < C - 1)
 		{
 			int	n = a[r][c];
 			bool	ok;
-			cout << "pos: "<< r << ' ' << c << endl;
+			
 			i = -1; // up
 			ok = true;
 			while (++i < r)
 			{
-
 				if (a[i][c] >= n)
 					ok = false;
 			}
-			if (ok) { res++; cout<<"u: "<<r<<' '<<c<<' '<<n<<endl; continue ;}
+			if (ok)
+			{
+				res++;
+				continue ;
+			}
 			i = r; // down
 			ok = true;
 			while (++i < R)
@@ -46,9 +56,11 @@ int	main()
 				if (a[i][c] >= n)
 					ok = false;
 			}
-
-
-			if (ok) { res++; cout<<"d: "<<r<<' '<<c<<' '<<n<<endl; continue ;}
+			if (ok)
+			{
+				res++;
+				continue ;
+			}
 			ok = true;
 			i = -1; // left
 			while (++i < c)
@@ -56,8 +68,11 @@ int	main()
 				if (a[r][i] >= n)
 					ok = false;
 			}
-
-			if (ok) { res++; cout<<"l: "<<r<<' '<<c<<' '<<n<<endl; continue ;}
+			if (ok)
+			{
+				res++;
+				continue ;
+			}
 			ok = true;
 			i = c; // right
 			while (++i < C)
@@ -65,19 +80,20 @@ int	main()
 				if (a[r][i] >= n)
 					ok = false;
 			}
-			if (ok) { res++; cout<<"r: "<<r<<' '<<c<<' '<<n<<endl; continue ;}
-
-
-			long long temp = u * d * l * ri;
-			cout << "score : "<< temp << endl;
-			res2 = res2 > temp ? res2 : temp;
-
+			if (ok)
+			{
+				res++;
+				continue ;
+			}
 		}
+
 		// part 2
+		
 		c = 0;
 		while (++c < C - 1)
 		{
 			int	n = a[r][c];
+			
 			u = 0;
 			i = r;
 			while (--i > -1)
@@ -86,8 +102,6 @@ int	main()
 				if (a[i][c]>=n)
 					break;
 			}
-			cout << "(u)(score) : " << u;
-
 			d = 0;
 			i = r;
 			while (++i < R)
@@ -96,8 +110,6 @@ int	main()
 				if (a[i][c]>=n)
 					break;
 			}
-			cout << " (d)(score) : " << d << endl;
-
 			l = 0;
 			i = c;
 			while (--i > -1)
@@ -106,8 +118,6 @@ int	main()
 				if (a[r][i]>=n)
 					break;
 			}
-			cout << "(l)(score) : " << l ;
-
 			ri = 0;
 			i = c;
 			while (++i < C)
@@ -116,61 +126,11 @@ int	main()
 				if (a[r][i]>=n)
 					break ;
 			}
-			cout << " (r)(score) : " << ri << endl;
-
-			long long temp = u * d * l * ri;
-			cout << temp << endl;
-			res2 = res2 > temp ? res2 : temp;
+			scen = u * d * l * ri;
+			res2 = res2 > scen ? res2 : scen;
 		}
-		
-		/*
-		c = 0;
-		while (++c < C - 1)
-		{
-			int	n = a[r][c];
-			i = r;
-			u = 0; // u
-			while (-- i > -1)
-			{
-				if (a[i][r] <= n)
-					u++;
-				if (a[i][r] > n)
-					break ;
-			}
-			i = r;
-			d = 0; // down
-			while (++i < R)
-			{
-				if (a[i][r] <= n)
-					d++;
-				if (a[i][r] > n)
-					break ;
-			}
-			i = c;
-			l = 0; // left
-			while (--i > -1)
-			{
-				if (a[r][i] <= n)
-					l++;
-				if (a[r][i] > n)
-					break ;
-			}
-			i = c;
-			ri = 0; // u
-			while (++i < C)
-			{
-				if (a[r][i] <= n)
-					ri++;
-				if (a[r][i] > n)
-					break ;
-			}
-			long long temp = u * d * l * ri;
-			res2 = temp > res2 ? temp : res2;
-			cout << u << ' ' << d << ' ' << l << ' ' << ri << endl ;
-			cout << "p2 = " << u * d * l * ri << endl ;
-		}
-		*/
 	}
-	cout << res << ' ' << peri << ' ' << res+peri << endl;
-	cout << res2 << endl;
+
+	cout << "Star 1: " << res << endl;
+	cout << "Star 2: " << res2 << endl;
 } 
