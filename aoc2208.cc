@@ -21,12 +21,13 @@ int	main()
 	}
 
 	int	R = (int) a.size(), C = (int) a[0].size();
-	int	res = 0, i, j, r, c;
+	int	i, j, r, c;
 	int	peri = R * 2 + C * 2 - 4;
+	int	res = peri;
 	
 	// part 2
 	long long	res2 = 0, scen;
-	int		u, d, l, ri;
+	int		u, d, l, rr;
 	
 	r = 0;
 	while (++r < R - 1)
@@ -118,15 +119,15 @@ int	main()
 				if (a[r][i]>=n)
 					break;
 			}
-			ri = 0;
+			rr = 0;
 			i = c;
 			while (++i < C)
 			{
-				ri++;
+				rr++;
 				if (a[r][i]>=n)
 					break ;
 			}
-			scen = u * d * l * ri;
+			scen = u * d * l * rr;
 			res2 = res2 > scen ? res2 : scen;
 		}
 	}
