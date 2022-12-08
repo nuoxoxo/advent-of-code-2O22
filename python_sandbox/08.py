@@ -1,6 +1,6 @@
-from typing import List
+from typing import Tuple
 
-def solve(file) -> List[int]:
+def solve(file) -> Tuple[int, int]:
     a = []
     for line in file:
         temp = []
@@ -73,7 +73,8 @@ def solve(file) -> List[int]:
                     break
             temp = u * d * l * rr
             res2 = res2 if res2 > temp else temp
-    return [res, res2]
+    yield (res)
+    yield (res2)
 
 with open('2208.0') as file:
     r1, r2 = solve(file)
