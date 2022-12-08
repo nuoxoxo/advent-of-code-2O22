@@ -1,1 +1,1 @@
-# "When in doubt, use brute force." - Ken Thompson
+## "When in doubt, use brute force." - Ken Thompson
