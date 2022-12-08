@@ -23,7 +23,7 @@ all	:	$(name)
 
 $(name)	:	$(src)
 		@ $(comp) $^ -o $@
-		@ echo "data" && echo "" 
+		@ echo "data"; echo "" 
 		@ ./$(name) < 2209.0
 		@#@ ./$(name) < 2208.0
 		@#@ ./$(name) < 2207.0
@@ -36,7 +36,7 @@ $(name)	:	$(src)
 		@#@ ./$(name) < 2202.0
 		@#@ ./$(name) < 2202a.0
 		@#@ ./$(name) < 2201.0
-		@ echo "" && echo "test" && echo ""
+		@ echo ""; echo "test"; echo ""
 		@ ./$(name) < test
 		@ make f
 
