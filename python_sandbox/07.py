@@ -1,6 +1,6 @@
-from typing import List
+from typing import Tuple
 
-def solve(file) -> List[int]:
+def solve(file) -> Tuple[int, int]:
     a = []
     for l in file:
         a.append(l.strip())
@@ -46,7 +46,8 @@ def solve(file) -> List[int]:
             r += v
         if v > togo:
             r2 = min(r2, v)
-    return [r, r2]
+    yield r
+    yield r2
 
 with open('2207.0') as file:
     r1, r2 = solve(file)

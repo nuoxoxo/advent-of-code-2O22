@@ -1,6 +1,6 @@
-from typing import List
+from typing import Tuple
 
-def solve(file) -> List[int]:
+def solve(file) -> Tuple[int, int]:
     a = []
     op = []
     ok = False
@@ -45,7 +45,8 @@ def solve(file) -> List[int]:
     for i in range(tt):
         r1 += a1[i][-1]
         r2 += a2[i][-1]
-    return [r1, r2]
+    yield r1
+    yield r2
 
 with open('2205.0') as file:
     r1, r2 = solve(file)
