@@ -15,16 +15,20 @@ src	:=	aoc2205.cc
 src	:=	aoc2205_part1.cc
 src	:=	aoc2205_part2.cc
 src	:=	aoc2206.cc
+src	:=	aoc2207a.cc
 src	:=	aoc2207.cc
+src	:=	aoc2208a.cc
 src	:=	aoc2208.cc
 src	:=	aoc2209.cc
+src	:=	aoc2210.cc
 
 all	:	$(name)
 
 $(name)	:	$(src)
 		@ $(comp) $^ -o $@
-		@ echo "data"; echo "" 
-		@ ./$(name) < 2209.0
+		@ echo "data" && echo "" 
+		@ ./$(name) < 2210.0
+		@#@ ./$(name) < 2209.0
 		@#@ ./$(name) < 2208.0
 		@#@ ./$(name) < 2207.0
 		@#@ ./$(name) < 2206.0
@@ -36,7 +40,10 @@ $(name)	:	$(src)
 		@#@ ./$(name) < 2202.0
 		@#@ ./$(name) < 2202a.0
 		@#@ ./$(name) < 2201.0
-		@ echo ""; echo "test"; echo ""
+		@#@ ./$(name) < 2209.1
+		@#@ echo "" && echo "test \n(part 2)" && echo ""
+		@#@ ./$(name) < 2209.2
+		@ echo "" && echo "test" && echo ""
 		@ ./$(name) < test
 		@ make f
 
