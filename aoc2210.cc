@@ -56,8 +56,6 @@ int	main()
 		if (i == len)
 			i %= len;
 		row = i % 40;
-		// if (!((i + 1) % 40))
-		// 	r2 += '\n';
 		if (row == x - 1 || row == x || row == x + 1)
 			r2 += '@';
 		else
