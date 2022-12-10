@@ -46,13 +46,13 @@ def solve(file) -> Tuple[int, str]:
         i += 1
     yield(r2)
 
-with open('2210.0') as file:
+with open('../_inputs/2210.0') as file:
     print('data')
     r1, r2 = solve(file)
     print('star 1:', r1)
     print('star 2:', r2, end='\n\n')
 
-with open('2210.1') as file:
+with open('../_inputs/2210.1') as file:
     print('test')
     r1, r2 = solve(file)
     print('star 1:', r1)
