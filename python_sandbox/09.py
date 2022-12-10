@@ -71,18 +71,18 @@ def solve(file) -> Tuple[int, int]:
     yield(len(vis))
     yield(len(vis2))
 
-with open('2209.0') as file:
+with open('../_inputs/2209.0') as file:
     r1, r2 = solve(file)
     print('data')
     print('Star 1:', r1)
     print('Star 2:', r2, end='\n\n')
 
-with open('2209.1') as file:
+with open('../_inputs/2209.1') as file:
     print('test')
     r1, r2 = solve(file)
     print('Star 1:', r1, end='\n\n')
 
-with open('2209.2') as file:
+with open('../_inputs/2209.2') as file:
     print('test')
     r1, r2 = solve(file)
     print('Star 2:', r2, end='\n')

@@ -9,10 +9,22 @@ import (
 	_ "strconv"
 )
 
-var path string = "_inputs/2202.0"
-// var path string = "_inputs/2202.1"
-
 func main() {
+
+	var r1, r2 int
+
+	r1, r2 = solve("_inputs/2202.0")
+	fmt.Println("data")
+	fmt.Println("Star 1:", r1)
+	fmt.Println("Star 2:", r2, "\n")
+
+	r1, r2 = solve("_inputs/2202.1")
+	fmt.Println("test")
+	fmt.Println("Star 1:", r1)
+	fmt.Println("Star 2:", r2)
+}
+
+func solve(path string) (int, int) {
 	data, err := os.Open(path)
 	if err != nil {
 		panic(err)
@@ -70,6 +82,5 @@ func main() {
 			res2 += l + 6
 		}
 	}
-	fmt.Println("Star 1:", res)
-	fmt.Println("Star 2:", res2)
+	return res, res2
 }
