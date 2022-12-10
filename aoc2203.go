@@ -9,20 +9,6 @@ import (
 	_ "strconv"
 )
 
-func main() {
-	var r1, r2 int
-
-	r1, r2 = solve("_inputs/2203.0")
-	fmt.Println("data")
-	fmt.Println("Star 1:", r1)
-	fmt.Println("Star 2:", r2, "\n")
-
-	r1, r2 = solve("_inputs/2203.1")
-	fmt.Println("test")
-	fmt.Println("Star 1:", r1)
-	fmt.Println("Star 2:", r2)
-}
-
 func solve(path string) (int, int) {
 	data, err := os.Open(path)
 	if err != nil {
@@ -72,4 +58,18 @@ func calc(c rune) int {
 		return cc - int('a') + 1
 	}
 	return cc - int('A') + 27
+}
+
+func main() {
+	var r1, r2 int
+
+	r1, r2 = solve("_inputs/2203.0")
+	fmt.Println("data")
+	fmt.Println("Star 1:", r1)
+	fmt.Println("Star 2:", r2, "\n")
+
+	r1, r2 = solve("_inputs/2203.1")
+	fmt.Println("test")
+	fmt.Println("Star 1:", r1)
+	fmt.Println("Star 2:", r2)
 }
