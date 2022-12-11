@@ -3,8 +3,8 @@ import copy
 M, m = [], []
 M2 = []
 
-# with open('_inputs/2211.1') as file:
-with open('_inputs/2211.0') as file:
+# with open('2211.1') as file:
+with open('2211.0') as file:
     for line in file:
         if 'Start' in line: # 0
             line = line.strip()[16:]
