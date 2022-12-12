@@ -5,12 +5,6 @@
 
 using	namespace std;
 
-#define vvi vector<vector<int>>
-#define vi vector<int>
-#define vvc vector<vector<char>>
-#define vc vector<char>
-#define pi pair<int, int>
-
 int	bfs(vector<string>, int, int, int, int);
 int	bfs2(vector<string>, int, int);
 
@@ -37,6 +31,9 @@ int	main()
 		}
 	}
 	
+	a[sr][sc] = 'a';
+	a[er][ec] = 'z';
+	
 	// part 1
 	res = bfs(a, sr, sc, er, ec);
 	
@@ -51,17 +48,14 @@ int	main()
 int	bfs2(vector<string> a, int er, int ec)
 {
 	int R = (int) a.size(), C = (int) a[0].length();
-	int r = -1, c;
-	int res = 0;
-
-	int rr, cc;
+	int res = (int) 1e9 ;
+	int r = -1, c, rr, cc;
 
 	vector<vector<int>>	D{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 	vector<vector<bool>>	seen(R, vector<bool>(C, false));
 	vector<vector<int>>	mp(R, vector<int>(C, 0));
 	deque<pair<int, int>>	dq;
 
-	a[er][ec] = 'z';
 	dq.push_back({er, ec});
 	while (!dq.empty())
 	{
@@ -75,7 +69,7 @@ int	bfs2(vector<string> a, int er, int ec)
 			if (rr < 0 || rr > R - 1 || cc < 0 || cc > C - 1)
 				continue ;
 			if (a[rr][cc] == 'a' && mp[rr][cc])
-				return mp[rr][cc] - 1; // one off
+				res = min(res, mp[rr][cc]);
 			if (seen[rr][cc])
 				continue ;
 			if (a[r][c] - a[rr][cc] > 1)
@@ -91,8 +85,7 @@ int	bfs2(vector<string> a, int er, int ec)
 			dq.push_back({rr, cc});
 		}
 	}
-	res = mp[rr][cc] - 1;
-	return (res ? res : -1);
+	return res;
 }
 
 int	bfs(vector<string> a, int sr, int sc, int er, int ec)
@@ -106,8 +99,6 @@ int	bfs(vector<string> a, int sr, int sc, int er, int ec)
 	vector<vector<int>>	mp(R, vector<int>(C, 0));
 	deque<pair<int, int>>	dq;
 
-	a[sr][sc] = 'a';
-	a[er][ec] = 'z';
 	dq.push_back({sr, sc});
 	while (!dq.empty())
 	{
