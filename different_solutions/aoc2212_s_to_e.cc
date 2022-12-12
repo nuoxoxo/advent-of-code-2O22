@@ -12,14 +12,13 @@ using	namespace std;
 #define pi pair<int, int>
 
 int	bfs(vector<string>, int, int, int, int);
-int	bfs2(vector<string>, int, int);
 
 int	main()
 {
 	vector<string>	a;
 	string	s;
 	int	R, C, sr, er, sc, ec, r = -1, c;
-	int	res, res2;//, B;
+	int	res, res2, B;
 
 	while (cin >> s)
 	{
@@ -36,63 +35,24 @@ int	main()
 			if (a[r][c] == 'E') { er = r, ec = c;}
 		}
 	}
-	
 	// part 1
 	res = bfs(a, sr, sc, er, ec);
-	
 	// part 2
-	res2 = bfs2(a, er, ec);
-
-	cout << "Star 1: " << res << endl;
-	cout << "Star 2: " << res2 << endl;
-}
-
-
-int	bfs2(vector<string> a, int er, int ec)
-{
-	int R = (int) a.size(), C = (int) a[0].length();
-	int r = -1, c;
-	int res = 0;
-
-	int rr, cc;
-
-	vector<vector<int>>	D{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-	vector<vector<bool>>	seen(R, vector<bool>(C, false));
-	vector<vector<int>>	mp(R, vector<int>(C, 0));
-	deque<pair<int, int>>	dq;
-
-	a[er][ec] = 'z';
-	dq.push_back({er, ec});
-	while (!dq.empty())
+	res2 = (int) 1e9;
+	r = -1;
+	while (++r < R)
 	{
-		r = dq.front().first;
-		c = dq.front().second;
-		dq.pop_front();
-		for (vector<int>& d: D)
+		c = -1;
+		while (++c < C)
 		{
-			rr = r + d[0];
-			cc = c + d[1];
-			if (rr < 0 || rr > R - 1 || cc < 0 || cc > C - 1)
+			if (a[r][c] != 'a')
 				continue ;
-			if (a[rr][cc] == 'a' && mp[rr][cc])
-				return mp[rr][cc] - 1; // one off
-			if (seen[rr][cc])
-				continue ;
-			if (a[r][c] - a[rr][cc] > 1)
-				continue ;
-			/*
-			cout << "next: " << rr << ' ' << cc << ' ';
-			cout << a[rr][cc] << " - ";
-			cout << "curr: " << r << ' ' << c << ' ';
-			cout << a[r][c] << endl;
-			*/
-			seen[rr][cc] = true;
-			mp[rr][cc] = mp[r][c] + 1;
-			dq.push_back({rr, cc});
+			B = bfs(a, r, c, er, ec);
+			res2 = B != -1 ? min(res2, B) : res2;
 		}
 	}
-	res = mp[rr][cc] - 1;
-	return (res ? res : -1);
+	cout << "Star 1: " << res << endl;
+	cout << "Star 2: " << res2 << endl;
 }
 
 int	bfs(vector<string> a, int sr, int sc, int er, int ec)
