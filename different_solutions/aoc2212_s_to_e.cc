@@ -35,9 +35,13 @@ int	main()
 			if (a[r][c] == 'E') { er = r, ec = c;}
 		}
 	}
+	
 	// part 1
+	
 	res = bfs(a, sr, sc, er, ec);
+	
 	// part 2
+	
 	res2 = (int) 1e9;
 	r = -1;
 	while (++r < R)
