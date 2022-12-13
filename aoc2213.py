@@ -1,7 +1,7 @@
 import functools
 
-path = '2213.0'
-# path = '2213.1'
+path = '_inputs/2213.0'
+# path = '_inputs/2213.1'
 
 a = []
 l = []
