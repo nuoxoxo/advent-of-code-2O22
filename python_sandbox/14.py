@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 
 def main():
-    path = '_inputs/2214.'
-    d = solve(open(path + '0'), False)
-    d2 = solve(open(path + '0'), True)    
-    t = solve(open(path + '1'), False)
-    t2 = solve(open(path + '1'), True)
-    
+    path = '../_inputs/2214.'
+    d, d2 = day14(path + '0')
+    t, t2 = day14(path + '1')
+
     print('data:')
     print('Star 1:', d)
     print('Star 2:', d2)
@@ -14,6 +12,11 @@ def main():
     print('\ntest:')
     print('Star 1:', t)
     print('Star 2:', t2)
+
+
+def day14(path: str) -> (int, int):
+    yield solve(open(path), False)
+    yield solve(open(path), True)
 
 def solve(file, p2) -> int:
     D = []

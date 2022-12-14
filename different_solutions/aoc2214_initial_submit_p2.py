@@ -38,7 +38,7 @@ def drop(a, p) -> int:
             a[r][c] = 'o'
         # else:
             # ok = True
-        # for l in a: print(l) # sim
+        # for l in a: print(''.join(l)) # sim
         print(ok,r,c,a[r][c],R,C,count,count + 1)
         count += 1
     print(count)
