@@ -1,12 +1,12 @@
-# path = '../_inputs/2214.1'
-path = '../_inputs/2214.0'
-file = open(path)
+#!/usr/bin/python3
 
-D = []
-
-offset = 1000
-#offset = 0
-#offset = 10
+def main():
+    path = '../_inputs/2214.'
+    r1 = p2(open(path + '0'))
+    r2 = p2(open(path + '1'))
+    print('\nStar 2:')
+    print('data:', r1)
+    print('test:', r2)
 
 def drop(a, p) -> int:
     R, C = len(a), len(a[0])
@@ -44,68 +44,72 @@ def drop(a, p) -> int:
     print(count)
     return count
 
-for line in file:
-    line = line.strip().split(' -> ')
-    t = []
-    for l in line:
-        a, b = l.split(',')
-        t.append([int(a), int(b)])
-    D.append(t)
-# print(D)
-DD = []
-mini, maxi = 1e9, -1e9
-_mini, _maxi = 1e9, -1e9
-R = -1e9
-for r in range(len(D)):
-    for c in range(len(D[r])):
-        n = D[r][c][0]
-        mini = min(n, mini)
-        maxi = max(n, maxi)        
-        n = D[r][c][1]
-        R = max(n, R)
-        _mini = min(n, _mini)
-        _maxi = max(n, _maxi)
+def p2(file) -> int:
+    D = []
+    offset = 1000 # p2
+    #offset = 0
+    #offset = 10
+    for line in file:
+        line = line.strip().split(' -> ')
+        t = []
+        for l in line:
+            a, b = l.split(',')
+            t.append([int(a), int(b)])
+        D.append(t)
+    # print(D)
+    DD = []
+    mini, maxi = 1e9, -1e9
+    _mini, _maxi = 1e9, -1e9
+    R = -1e9
+    for r in range(len(D)):
+        for c in range(len(D[r])):
+            n = D[r][c][0]
+            mini = min(n, mini)
+            maxi = max(n, maxi)        
+            n = D[r][c][1]
+            R = max(n, R)
+            _mini = min(n, _mini)
+            _maxi = max(n, _maxi)
 
-for r in range(len(D)):
-    t = []
-    for c in range(len(D[r])):
-        D[r][c][0] -= mini
-        # D[r][c][1] -= _mini
-        t.append((D[r][c][0], D[r][c][1]))
-    DD.append(t)
+    for r in range(len(D)):
+        t = []
+        for c in range(len(D[r])):
+            D[r][c][0] -= mini
+            # D[r][c][1] -= _mini
+            t.append((D[r][c][0], D[r][c][1]))
+        DD.append(t)
 
-D = DD
-R += 1 + 2
-C = maxi - mini + 1
-C = 2 * offset + maxi - mini + 1 # p2
-PointDrop = 500 - mini + offset
+    D = DD
+    R += 1 + 2
+    C = maxi - mini + 1
+    C = 2 * offset + maxi - mini + 1 # p2
+    PointDrop = 500 - mini + offset
 
-print(maxi, mini, _maxi, _mini)
-print("size:",R,C)
+    print(maxi, mini, _maxi, _mini)
+    print("size:",R,C)
 
+    print(PointDrop)
+    a = [['.' for _ in range(C)] for _ in range(R - 1)]
+    a.append(['#' for _ in range(C)])
+    for i, l in enumerate(a): print(l, i)
 
-print(PointDrop)
-a = [['.' for _ in range(C)] for _ in range(R - 1)]
-a.append(['#' for _ in range(C)])
-for i, l in enumerate(a): print(l, i)
+    print(D)
+    for r in range(len(D)):
+        for c in range(len(D[r]) - 1):
+            n1, n2 = D[r][c], D[r][c + 1]
+            if n1[1] == n2[1]:
+                start, end = min(n1[0], n2[0]), max(n1[0], n2[0])
+                #print(start, end)
+                start += offset # p2
+                end += offset # p2
+                for i in range(start, end + 1):
+                    print(n1[1], i)
+                    a[n1[1]][i] = '#'
+            elif n1[0] == n2[0]:
+                start, end = min(n1[1], n2[1]), max(n1[1], n2[1])
+                for i in range(start, end + 1):
+                    a[i][n2[0] + offset] = '#'
+    return drop(a, PointDrop)
 
-print(D)
-for r in range(len(D)):
-    for c in range(len(D[r]) - 1):
-        n1, n2 = D[r][c], D[r][c + 1]
-        if n1[1] == n2[1]:
-            start, end = min(n1[0], n2[0]), max(n1[0], n2[0])
-            #print(start, end)
-            start += offset # p2
-            end += offset # p2
-            for i in range(start, end + 1):
-                print(n1[1], i)
-                a[n1[1]][i] = '#'
-        elif n1[0] == n2[0]:
-            start, end = min(n1[1], n2[1]), max(n1[1], n2[1])
-
-            for i in range(start, end + 1):
-                a[i][n2[0] + offset] = '#'
-
-res = drop(a, PointDrop)
-print('Star 2:', res)
+if __name__ == '__main__':
+    main()
