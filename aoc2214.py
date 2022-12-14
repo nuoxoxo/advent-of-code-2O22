@@ -128,14 +128,14 @@ def p2(file) -> int:
             t.append((D[r][c][0], D[r][c][1]))
         DD.append(t)
     D = DD
-    R += 1 + 2
+    R += 1 + 1
     C = maxi - mini + 1
     C = 2 * offset + maxi - mini + 1 # p2
     PointDrop = 500 - mini + offset
     print(maxi, mini, _maxi, _mini)
     print("size:",R,C)
     print(PointDrop)
-    a = [['.' for _ in range(C)] for _ in range(R - 1)]
+    a = [['.' for _ in range(C)] for _ in range(R)]
     a.append(['#' for _ in range(C)])
     for i, l in enumerate(a): print(l, i)
     print(D)
