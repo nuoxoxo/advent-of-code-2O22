@@ -10,6 +10,7 @@
 !*.sh
 !*.go
 !Makefile
+!_boiler/
 !_inputs/
 !_inputs/*.0
 !_inputs/*.1
