@@ -22,15 +22,17 @@ src	:=	aoc2208.cc
 src	:=	aoc2209.cc
 src	:=	aoc2210.cc
 src	:=	aoc2211.cc
-# src	:=	different_solutions/aoc2212_s_to_e.cc
 src	:=	aoc2212.cc
+src	:=	aoc2215.cc
+src	:=	aoc2216.cc
 
 all	:	$(name)
 
 $(name)	:	$(src)
 		@ $(comp) $^ -o $@
 		@ echo "data" && echo "" 
-		@ ./$(name) < _inputs/2212.0
+		@ ./$(name) < 2216.0
+		@#@ ./$(name) < 2215.0
 		@#@ ./$(name) < 2212.0
 		@#@ ./$(name) < 2211.0
 		@#@ ./$(name) < 2210.0
@@ -51,8 +53,8 @@ $(name)	:	$(src)
 		@#@ ./$(name) < 2212.1
 		@#@ ./$(name) < 2209.2
 		@ echo "" && echo "test" && echo ""
-		@#@ ./$(name) < test
-		@ ./$(name) < _inputs/2212.1
+		@ ./$(name) < test
+		@#@ ./$(name) < _inputs/2212.1
 		@ make f
 
 clean	:
