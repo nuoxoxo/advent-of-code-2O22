@@ -1,13 +1,13 @@
 def main():
     fd = 0#1#0
-    pref = '../_inputs/'
+    pref = '_inputs/'
     path = '2221.'
     data = open(pref + path + str(fd)).read()
-    print(parser(data))
-    print(parser2(data))
+    print('Star 1:', parser(data))
+    print('Star 2:', parser2(data))
 
 def calc(job, M):
-    if not type(job) is int:
+    if type(job) is not int:
         l, do, r = job
         if do == '+':
             return calc(M[l], M) + calc(M[r], M)
@@ -35,32 +35,19 @@ def parser(data):
 
 def calc2(job, M, mid):
     if job == 'humn':
-    # if job == 'humn' and mid > -1:
         return mid
     if not type(M[job]) is int:
-        #if job] == 'humn':
-        #    return mid # binary search
-        # l, do, r = R
         l, do, r = M[job]
         L = calc2(l, M, mid)
-        # L = calc(M[l], M)
         R = calc2(r, M, mid)
-        # R = calc(M[r], M)
         if do == '+':
             return L + R
-            # return calc2(l, M, -1) + calc2(r, M, -1)
         if do == '-':
             return L - R
-            # return calc2(l, M, -1) - calc2(r, M, -1)
-            # return calc2(M[l], M, mid) - calc2(M[r], M, mid)
         if do == '/':
             return L / R
-            # return calc2(l, M, -1) // calc2(r, M, -1)
-            # return calc2(M[l], M, mid) // calc2(M[r], M, mid)
         if do == '*':
             return L * R
-            # return calc2(l, M, -1) * calc2(r, M, -1)
-            # return calc2(M[l], M, mid) * calc2(M[r], M, mid)
     return int(M[job])
 
 def parser2(data):
@@ -82,7 +69,6 @@ def parser2(data):
     lhs = M['root'][0]
     rhs = M['root'][2]
     target = calc(M[rhs], M) # or calc2 both work
-    # target = calc2(rhs, M, 0)
     
     L = 0
     R = int(1e20) # actual bound is 13
