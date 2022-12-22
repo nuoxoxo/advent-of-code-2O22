@@ -1,11 +1,11 @@
 import re
 
 def main():
-    pref = '../_inputs/'
+    path = '_inputs/2222.0'
     
-    res_eg = p1(open(pref + '2222.0'))#.read()
-    res = p1(open(pref + '2222.1'))#.read()
-    res2 = p2(open(pref + '2222.0'))
+    res_eg = p1(open('_inputs/2222.1'))#.read()
+    res = p1(open(path))#.read()
+    res2 = p2(open(path))
     
     print('Star 1:', res_eg, '(test)')#.read()
     print('Star 1:', res)#.read()
