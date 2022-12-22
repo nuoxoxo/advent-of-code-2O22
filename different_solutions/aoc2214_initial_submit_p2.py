@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 def main():
     path = '../_inputs/2214.'
     r1 = p2(open(path + '0'))
