@@ -2,9 +2,8 @@ import sympy
 
 def main():
     fd = 0#1#0
-    pref = '_inputs/'
-    path = '2221.'
-    data = open(pref + path + str(fd)).read()
+    path = '_inputs/2221.'
+    data = open(path + str(fd)).read()
     print('Star 1:', p1(data))
     print('Star 2:', p2(data))
 
@@ -19,7 +18,7 @@ def p2(data):
         if m in M:
             continue
         if job.isdigit():
-            M[m] = sympy.Integer(job)
+            M[m] = sympy.Integer(job) # sympy
         else:
             # print('job:', job)
             left, do, right = job.split()
