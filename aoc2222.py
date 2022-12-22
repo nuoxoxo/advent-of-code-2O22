@@ -2,9 +2,15 @@ import re
 
 def main():
     pref = '../_inputs/'
-    res = p2(open(pref + '2222.0'))
-    print('Star 2:', res)#.read()
-    assert res == 115311
+    
+    res_eg = p1(open(pref + '2222.0'))#.read()
+    res = p1(open(pref + '2222.1'))#.read()
+    res2 = p2(open(pref + '2222.0'))
+    
+    print('Star 1:', res_eg, '(test)')#.read()
+    print('Star 1:', res)#.read()
+    print('Star 2:', res2)#.read()
+    assert res2 == 115311
 
 # 129198 -> hi
 
