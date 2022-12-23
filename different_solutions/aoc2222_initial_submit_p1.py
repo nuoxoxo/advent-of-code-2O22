@@ -1,7 +1,7 @@
 import re
 
-fd = 1
-file = open('2222.' + str(fd))#.read()
+fd = 0#1
+file = open('../_inputs/2222.' + str(fd))#.read()
 
 G = []
 sep = False
@@ -67,7 +67,7 @@ if dr == 0:
     else:
         x = 2
 else:
-    if dr == 1:
+    if dc == 1:
         x = 1
     else:
         x = 3

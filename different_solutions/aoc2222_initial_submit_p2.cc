@@ -102,7 +102,7 @@ int	main()
 	int x = -1;
 	if (dr)
 	{
-		if (dr == 1)
+		if (dc == 1)
 			x = 1;
 		else
 			x = 3;
@@ -283,7 +283,7 @@ int	solve2(vector<string> G, string& movement)
 	int x = -1;
 	if (dr)
 	{
-		if (dr == 1)
+		if (dc == 1)
 			x = 1;
 		else
 			x = 3;
@@ -360,7 +360,7 @@ int	solve(vector<string> G, string& movement)
 	int x = -1;
 	if (dr)
 	{
-		if (dr == 1)
+		if (dc == 1)
 			x = 1;
 		else
 			x = 3;

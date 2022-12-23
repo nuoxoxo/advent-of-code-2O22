@@ -230,7 +230,7 @@ def p2(file) -> int:
         else:
             x = 2
     else:
-        if dr == 1:
+        if dc == 1:
             x = 1
         else:
             x = 3
@@ -300,7 +300,7 @@ def p1(file) -> int:
         else:
             x = 2
     else:
-        if dr == 1:
+        if dc == 1:
             x = 1
         else:
             x = 3
