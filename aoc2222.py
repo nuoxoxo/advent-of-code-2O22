@@ -85,7 +85,7 @@ def p2(file) -> int:
 
     for i in range(len(G)): # fill zero at lines that come short
         G[i] = G[i] + ' ' * (W - len(G[i]))
-    for line in G: print(line)
+    # for line in G: print(line)
     c = 0
 
     while G[0][c] != '.': # find starting point
@@ -221,7 +221,7 @@ def p2(file) -> int:
             dr, dc = dc, -dr
         if key == 'L':
             dr, dc = -dc, dr
-        print('(', dr, dc, ')', val, key)
+        # print('(', dr, dc, ')', val, key)
     print('final facing: (', dr, dc, ')\n')
 
     if dr == 0:
@@ -257,7 +257,7 @@ def p1(file) -> int:
 
     for i in range(len(G)): # fill zero at lines that come short
         G[i] = G[i] + ' ' * (W - len(G[i]))
-    for line in G: print(line)
+    # for line in G: print(line)
     c = 0
 
     while G[0][c] != '.': # find starting point
@@ -291,7 +291,7 @@ def p1(file) -> int:
             dr, dc = dc, -dr
         if key == 'L':
             dr, dc = -dc, dr
-        print('(', dr, dc, ')', val, key)
+        # print('(', dr, dc, ')', val, key)
     print('final facing: (', dr, dc, ')\n')
 
     if dr == 0:
