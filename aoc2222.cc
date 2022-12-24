@@ -202,9 +202,9 @@ int	solve2(vector<string>& G, string& movement)
 	}
 	cout << "(final facing) " << dr << ' ' << dc << endl;
 	int x = -1;
-	if (dr && dr == 1)
+	if (dr && dc == 1)
 		x = 1;
-	if (dr && dr ^ 1)
+	if (dr && dc ^ 1)
 		x = 3;
 	if (!dr && dc == 1)
 		x = 1;
@@ -267,12 +267,12 @@ int	solve(vector<string>& G, string& movement)
 	}
 	cout << "(final facing) " << dr << ' ' << dc << endl;
 	int x = -1;
-	if (dr && dr == 1)
+	if (dr && dc == 1)
 		x = 1;
-	if (dr && dr ^ 1)
+	if (dr && dc ^ 1)
 		x = 3;
 	if (!dr && dc == 1)
-		x = 1;
+		x = 0;
 	if (!dr && dc ^ 1)
 		x = 2;
 	int res = 1000 * (r + 1) + 4 * (c + 1) + x;
