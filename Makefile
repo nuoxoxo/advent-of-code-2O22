@@ -2,8 +2,8 @@
 comp	:=	c++ -std=c++17
 name	:=	out
 rmv	:=	rm -f
-
 pre	:=	_inputs/
+
 src	:=	aoc2201.cc
 src	:=	aoc2202a.cc
 src	:=	aoc2202.cc
@@ -30,6 +30,7 @@ src	:=	aoc2216.cc
 src	:=	aoc2219.cc
 src	:=	aoc2222.cc
 src	:=	aoc2220.cc
+src	:=	aoc2225.cc
 
 all	:	$(name)
 
@@ -37,7 +38,7 @@ $(name)	:	$(src)
 		@ $(comp) $^ -o $@
 		@ echo "data" && echo "" 
 		@#@ ./$(name) < $(pre)2222.0
-		@ ./$(name) < $(pre)2220.0
+		@ ./$(name) < $(pre)2225.0
 		@#@ ./$(name) < 2219.0
 		@#@ ./$(name) < 2216.0
 		@#@ ./$(name) < 2215.0
@@ -58,8 +59,9 @@ $(name)	:	$(src)
 		@#@ ./$(name) < 2201.0
 		@#@ ./$(name) < 2209.1
 		@ echo "" && echo "test" && echo ""
+		@ ./$(name) < $(pre)2225.1
 		@#@ ./$(name) < $(pre)2222.1
-		@ ./$(name) < $(pre)2220.1
+		@#@ ./$(name) < $(pre)2220.1
 		@#@ ./$(name) < 2219.1
 		@#@ ./$(name) < 2212.1
 		@#@ echo "" && echo "test \n(part 2)" && echo ""
