@@ -31,14 +31,16 @@ src	:=	aoc2219.cc
 src	:=	aoc2222.cc
 src	:=	aoc2220.cc
 src	:=	aoc2225.cc
+src :=	aoc2215.cc
 
 all	:	$(name)
 
 $(name)	:	$(src)
 		@ $(comp) $^ -o $@
 		@ echo "data" && echo "" 
+		@ ./$(name) < $(pre)2215.0
 		@#@ ./$(name) < $(pre)2222.0
-		@ ./$(name) < $(pre)2225.0
+		@#@ ./$(name) < $(pre)2225.0
 		@#@ ./$(name) < 2219.0
 		@#@ ./$(name) < 2216.0
 		@#@ ./$(name) < 2215.0
@@ -58,8 +60,10 @@ $(name)	:	$(src)
 		@#@ ./$(name) < 2202a.0
 		@#@ ./$(name) < 2201.0
 		@#@ ./$(name) < 2209.1
-		@ echo "" && echo "test" && echo ""
-		@ ./$(name) < $(pre)2225.1
+		@# ...
+		@#@ echo "" && echo "test" && echo ""
+		@# ...
+		@#@ ./$(name) < $(pre)2225.1
 		@#@ ./$(name) < $(pre)2222.1
 		@#@ ./$(name) < $(pre)2220.1
 		@#@ ./$(name) < 2219.1
