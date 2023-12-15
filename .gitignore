@@ -10,5 +10,5 @@
 !*.sh
 !*.go
 !Makefile
-!python_sandbox/
+!sandbox/
 !drafts/
