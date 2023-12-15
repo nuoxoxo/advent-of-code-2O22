@@ -1,9 +1,8 @@
+fd = 0#1
 from typing import List, Tuple
 
 def main():
-    fd = 0#1
-    path = '_inputs/2224.'
-    file = open(path + str(fd))
+    file = open('./24.' + str(fd))
     a = []
     for line in file:
         a.append(line.strip())
