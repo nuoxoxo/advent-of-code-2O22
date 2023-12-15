@@ -1,8 +1,10 @@
 from collections import defaultdict
 import copy
 
+fd = 0
+
 def main():
-    file = open('_inputs/2223.' + str(fd))
+    file = open('2223.' + str(fd))
     input1 = set()
     for x, row in enumerate(file):
         for y, c in enumerate(row.strip()):
