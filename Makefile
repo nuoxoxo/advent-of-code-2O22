@@ -1,5 +1,5 @@
 #comp	:=	c++ -std=c++11 -Wall -Werror -Wextra
-comp	:=	c++ -std=c++17
+comp	:=	c++ -std=c++17 -fsanitize=address
 name	:=	out
 rmv	:=	rm -f
 
