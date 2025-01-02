@@ -1,130 +1,144 @@
-from collections import deque, defaultdict
-import sys
+import re
+from functools import lru_cache
+lines = open(0).read().splitlines()
+flos = {}
+tuns = {}
+mains = []
+M = {} # p2
+for line in lines:
+    flo = int(re.findall(r'\d+', line)[0])
+    vvs = re.findall(r'[A-Z]{2}', line)
+    main = vvs.pop(0)
+    assert vvs
+    print('parsing/',main,flo,'\tremain',vvs)
+    flos[main] = flo
+    tuns[main] = vvs
+    mains.append(main)
+    M[main] = (flo, vvs)
+for main in mains: print(main,'- flow/',flos[main],'\t→',tuns[main])
 
-path = '2216.1'
-path = '2216.0'
-#path = '2216.3'
+# graphviz
+f = open('16.x', 'w')
+f.write('strict digraph {\n')
+for m in mains:
+    for t in tuns[m]: f.write(f'  {m} -> {t} [label={flos[m]}]\n')
+f.write('}\n')
 
-# ::input.0
-# 1694
-# 1994
-# 2141 too lo
-# 2122 >?
-# 2129 > x (frequent)
-# 2134 > x
-# 2183 > found
-# 2288 too hi
+# part 2, also works for p1
 
-# ::input.3
-# 1694 too low
-# 1805 too hi
-# 1917
+not0 = 0
+N = len(M)
+indexofmain = {}
+sortedmains = []
 
-file = open(path).read().strip()
-a = [x for x in file.split('\n')]
-# trying bfs
-flow = {} # valve: rate
-tunnels = {} # valve: List[valve] # possible tunnel options
-first = False
-# high = -1e9
+# 'AA' added first
+for main in M:
+    if main == 'AA':
+        indexofmain[main] = len(sortedmains)
+        sortedmains.append(main)
+        not0 += 1
+# then other substantial vs
+for main, (flo, _) in M.items():
+    if flo > 0:
+        indexofmain[main] = len(sortedmains)
+        sortedmains.append(main)
+        not0 += 1
+# 0-flow valve
+for main in M:
+    if main in sortedmains: continue
+    indexofmain[main] = len(sortedmains)
+    sortedmains.append(main)
 
-Limit = 30
-for s in a:
-    ss = s.split(';')
-    valve, rate = ss[0].split()[1], int(ss[0].split('=')[1]) # 
-    if not first:
-    # if rate > high:
-        # high = rate
-        start = valve
-        first = True
-    to = ss[1].split(' to ')[1].split()
-    to.pop(0)
-    for i in range(len(to)):
-        if ',' in to[i]:
-            to[i] = to[i][:len(to[i])-1]
-    print('(parsing):', valve, rate, to) # room, flow, tunnels
-    flow[valve] = rate
-    tunnels[valve] = to
+# tunnels represented as sorted indices mapped to sorted valves indices
+sortedtunns = [ [] for _ in range(N) ]
+for i in range(N):
+    for main in M[sortedmains[i]][1]:
+        sortedtunns[i].append( indexofmain[main] )
 
-# Jp's solution
+# rates represented as sorted indices array
+sortedrates = [ M[main][0] for main in sortedmains ]
 
-states = {} # dp
-def fn(time, where, opened):
-    if time == 0:
-        return 0
-    state = (where, tuple(sorted(opened)), time)
-    if state in states: return states[state]
+INF = -10**20
+DP = [(INF,None)] * ( (1 << not0) * N * 31 * 2 )
+print(len(DP),'dp/len')
+
+def DFSp2(remain, currentvv, openedSet, player):
+    if remain == 0:
+        if player == 0:
+            return 0, openedSet
+        return DFSp2(26,0,openedSet,player-1)
+    main = openedSet*N*31*2 + currentvv*31*2 + remain*2 + player
+    if DP[main][0] > -1:
+        return DP[main]
     res = 0
-    if time > 0 and where not in opened and flow.get(where, 0) > 0:
-        new_opened_set = set(opened)
-        new_opened_set.add(where)
-        res = max(
-            res, sum(flow[v] for v in opened) + fn(time - 1, where, new_opened_set)
-        )
-    if time > 0:
-        for w in tunnels[where]:
-            res = max(res, sum(flow[v] for v in opened) + fn(time - 1, w, opened))
-    states[state] = res
-    return res
+    pathmask = openedSet
+    currentmask = ( not (openedSet & (1 << currentvv)))
+    if currentmask and sortedrates[currentvv]:# > 0:
+        updated_opened = openedSet | (1 << currentvv)
+        temp, pm = DFSp2(remain-1, currentvv, updated_opened, player)
+        _next = (remain - 1) * sortedrates[currentvv] + temp
+        if res < _next:
+            res = _next
+            pathmask = pm
+    for nextvv in sortedtunns[currentvv]:
+        _next, pm = DFSp2(remain-1, nextvv, openedSet, player)
+        if res < _next:
+            res = _next
+            pathmask = pm
+    DP[main] = (res,pathmask)
+    return res, pathmask
 
-"""
-# 2nd bfs
-res = 0
-seen = set()
-Q = deque( [(Limit, 'AA', 0, set())] )
-while Q:
-    # score, where, opened, time = Q.popleft()
-    time, where, score, opened = Q.popleft()
-    if ( time, where, score, tuple(sorted(opened)) ) in seen:
-        continue
-    seen.add( (time, where, score, tuple(sorted(opened))) )
-    res = max(res, score)
-    if time > 0:
-        for w in tunnels[where]:
-            Q.append( (time - 1, w, score + sum(flow[o] for o in opened), opened) )
-"""
-res = fn(Limit, 'AA', set())
-# print('Star 1:', res)
-p1 = res
+# part 1
+states = {}
+def DFS (remain, currentvv, openedSet):
+    if remain == 0:
+        return 0, set(openedSet)
+    state = (remain, currentvv, frozenset(openedSet))
+    if state in states:
+        return states[state]
+    if remain < 0:
+        print('state/',state,'remaining time/',remain)
+        assert False
+    res = 0
+    bestpath = set(openedSet)
+    currentsum = sum(flos[_] for _ in openedSet)
 
-# bfs (1st) - works for example, not for input
-best = 0
-seen = {}
-states = [ (1, start, 0, set()) ] # time, where_we_are, score, opened_valves
-while len(states) > 0:
-    time, where, score, opened = states.pop()
-    print(time, where, score, opened)
-    
-    opened_set = { o for o in opened }
-    
-    record = seen.get((time, where), -1)
-    if record >= score:
-        continue
-    
-    best = max(best, score)
-    if time == Limit:
-        best = max(best, score)
-        continue
-    seen[(time, where)] = score
-    # should we open the valve here
-    # if flow.get(where, 0) > 0 and where not in opened_set:
-    if flow.get(where, 0) > 0 and where not in opened:
-    # if time > 0 and where not in opened and flow.get(where, 0) > 0:
-        
-        opened_set.add(where)
-        current_sum = sum(flow.get(where, 0) for where in opened_set)
-        new_score = score + current_sum
-        new_state = (time + 1, where, new_score, tuple(sorted(opened_set)))
-        
-        states.append(new_state)
-        opened_set.discard(where)
-    # should we don't any valve in here
-    new_score = score + sum(flow.get(where, 0) for where in opened_set)
-    for t in tunnels[where]:
-        new_state = (time + 1, t, new_score, tuple(sorted(opened_set)))
-        # new_state = (time + 1, t, new_score, tuple(opened_set))
-        states.append(new_state)
-# print(best, start)
+    # option/1 - open current valve
+    if currentvv not in openedSet and flos[currentvv] > 0:
+        nextsum, nextpath = DFS(remain - 1, currentvv, openedSet | { currentvv })
+        totalsum = currentsum + nextsum
+        if res < totalsum:
+            bestpath = nextpath | { currentvv }
+            res = totalsum
 
-print('Star 1 (way 1):', res)
-print('Star 1 (way 2):', best)#, start)
+    # option/2 - enter the tunnel, aiming at a valve beyond, not opening it
+    for nextvv in tuns[currentvv]:
+        nextsum, nextpath = DFS(remain - 1, nextvv, openedSet)
+        totalsum = currentsum + nextsum
+        if res < totalsum:
+            bestpath = nextpath
+            res = totalsum
+
+    states[state] = (res, bestpath)
+    return res, bestpath
+
+#p1,path = DFS(30, 'AA', set())
+p1,pm1 = DFSp2(30,0,0,0)
+p2,pm2 = DFSp2(26,0,0,1)
+
+def getpath(pathmask):
+    path = []
+    for i in range(len(sortedmains)):
+        if pathmask & (1 << i): path.append(sortedmains[i])
+    return path
+
+path = getpath(pm1)
+print('part 1:',p1, '\t→',','.join(sorted(list(path))))
+assert p1 in [1651,2183]
+
+path = getpath(pm2)
+print('part 2:',p2, '\t→',','.join(sorted(list(path))))
+assert p2 in [1707,2911]
+
+# p2/lo - 1636
+# p2/hi - 4642

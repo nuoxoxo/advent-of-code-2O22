@@ -1,14 +1,7 @@
 *
-!*.c
 !*.cc
-!*.cpp
-!*.java
 !*.py
-!*.py3
-!*.pypy
 !*.md
 !*.sh
 !*.go
 !Makefile
-!sandbox/
-!drafts/
