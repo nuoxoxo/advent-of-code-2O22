@@ -1,5 +1,4 @@
-#comp	:=	c++ -std=c++11 -Wall -Werror -Wextra
-comp	:=	c++ -std=c++17 -fsanitize=address
+comp	:=	c++ -std=c++2a
 name	:=	out
 rmv	:=	rm -f
 
@@ -26,18 +25,19 @@ src	:=	aoc2211.cc
 src	:=	aoc2212.cc
 src	:=	aoc2215.cc
 src	:=	aoc2216.cc
-src	:=	aoc2219.cc
 src	:=	aoc2222.cc
 src	:=	aoc2220.cc
 src	:=	aoc2225.cc
 src	:=	aoc2224.cc
+src	:=	aoc2219.cc
 
-all	:	$(name)
+all	: $(name)
 
-$(name)	:	$(src)
+$(name)	: $(src)
 		@ $(comp) $^ -o $@
 		@ echo "data" && echo "" 
-		@ ./$(name) < $(pre)24.0
+		@ time ./$(name) < $(pre)19.0
+		@#@ ./$(name) < $(pre)24.0
 		@#@ ./$(name) < $(pre)2215.0
 		@#@ ./$(name) < $(pre)2222.0
 		@#@ ./$(name) < $(pre)2225.0
@@ -61,7 +61,8 @@ $(name)	:	$(src)
 		@#@ ./$(name) < 2201.0
 		@#@ ./$(name) < 2209.1
 		@ echo "" && echo "test" && echo ""
-		@ ./$(name) < $(pre)24.1
+		@ time ./$(name) < $(pre)19.1
+		@#@ ./$(name) < $(pre)24.1
 		@# ...
 		@#@ echo "" && echo "test" && echo ""
 		@# ...
@@ -75,10 +76,16 @@ $(name)	:	$(src)
 		@#@ ./$(name) < test
 		@ make f
 
+test	: $(name)
+		@ echo "\n------\ntest\n------\n"
+		@ time ./$(name) < $(pre)19.1
+		@ make f
+t		: test
+
 clean	:
 		@ $(rmv) $(name)
 
-fclean	:	clean
+fclean	: clean
 		@ $(rmv) out *.out
 
 f	:	fclean
